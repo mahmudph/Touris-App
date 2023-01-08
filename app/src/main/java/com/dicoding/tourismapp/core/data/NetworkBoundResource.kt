@@ -45,6 +45,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
         result.addSource(dbSource) { newData ->
             result.value = Resource.Loading(newData)
         }
+
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
