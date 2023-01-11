@@ -13,19 +13,14 @@ import com.dicoding.tourismapp.ApplicationBase
 import com.dicoding.tourismapp.R
 import com.dicoding.tourismapp.core.data.Resource
 import com.dicoding.tourismapp.core.ui.TourismAdapter
-import com.dicoding.tourismapp.core.ui.ViewModelFactory
 import com.dicoding.tourismapp.databinding.FragmentHomeBinding
 import com.dicoding.tourismapp.detail.DetailTourismActivity
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val homeViewModel: HomeViewModel by viewModels {
-        factory
-    }
+    private val homeViewModel: HomeViewModel by viewModels()
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -74,11 +69,6 @@ class HomeFragment : Fragment() {
                 adapter = tourismAdapter
             }
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as ApplicationBase).appCoreComponent.inject(this)
     }
 
     override fun onDestroyView() {
